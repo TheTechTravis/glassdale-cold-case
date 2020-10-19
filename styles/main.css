@@ -24,3 +24,14 @@ h1, h2, h3, h4, h5, h6 {
 	flex: 0 0 30%;
 	border: 1px dotted black;
 }
+
+.officersContainer {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-evenly;
+}
+
+.officer-details {
+	flex: 0 0 30%;
+	border: 1px dotted black;
+}
