@@ -22,5 +22,22 @@ h1, h2, h3, h4, h5, h6 {
 
 .criminal-details {
 	flex: 0 0 30%;
-	border: 1px dotted black;
+	border: 1px dotted red;
+	text-align: center;
+}
+
+.officersContainer {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-evenly;
+}
+
+.officer-details {
+	flex: 0 0 30%;
+	border: 1px dotted blue;
+	text-align: center;
+}
+
+.criminalHeading, .officerHeading {
+text-align: center;
 }

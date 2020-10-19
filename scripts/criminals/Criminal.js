@@ -2,7 +2,7 @@
 export const Criminal = (criminalObj) => {
     return `
         <div class="criminal-details">
-            <h2 class="criminal__name"> ${criminalObj.name} </h2>
+            <h3 class="criminal__name"> ${criminalObj.name} </h3>
             <p class="criminal__age"> Age: ${criminalObj.age} </p>
             <p class="criminal__conviction"> Crime: ${criminalObj.conviction} </p>
             <p class="criminal__incarceration-start"> Term start: ${new Date(criminalObj.incarceration.start).toLocaleDateString("en-US")} </p>
