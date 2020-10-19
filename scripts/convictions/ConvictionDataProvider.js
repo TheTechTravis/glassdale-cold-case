@@ -1,6 +1,10 @@
-// This module will fetch those crimes an export a useConvictions() method for other components to import.
+// This module will fetch those crimes and export a useConvictions() method for other components to import.
 
 let convictions = []
+
+export const useConvictions = () => {
+    return convictions.slice()
+}
 
 export const getConviction = () => {
     return fetch("https://criminals.glassdale.us/crimes")
@@ -17,4 +21,4 @@ export const getConviction = () => {
             }
         )
 }
-console.log(convictions)
+console.log(convictions) // This logs an array of conviction names
