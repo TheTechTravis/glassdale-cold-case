@@ -11,7 +11,7 @@ export const getConviction = () => {
                 convictions = parsedConvictions.map(
                     convictionsObj => {
                         const valueToAdd = convictionsObj.name
-                        return convictions.push(valueToAdd)
+                        convictions.push(valueToAdd)
                     }
                 )
             }
