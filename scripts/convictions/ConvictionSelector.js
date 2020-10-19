@@ -1,18 +1,19 @@
-// This module will invoke useConvictions() and then iterate that collection to fill out the dropdown in the browser.
-
 /*
  *   ConvictionSelect component that renders a select HTML element
  *   which lists all convictions in the Glassdale PD API
  */
-import { useConvictions } from "./ConvictionProvider.js"
+import { useConvictions, getConvictions } from "./ConvictionDataProvider.js"
 
 // Get a reference to the DOM element where the <select> will be rendered
 const contentTarget = document.querySelector(".filters__crime")
 
-export const ConvictionSelect = () => {
+export const ConvictionSelector = () => {
     // Get all convictions from application state
-    const convictions = useConvictions()
-    render(convictions)
+    
+    getConvictions().then( () => {
+        const convictions = useConvictions()
+        render(convictions)
+    })
 }
 
 const render = convictionsCollection => {
@@ -25,8 +26,14 @@ const render = convictionsCollection => {
         <select class="dropdown" id="crimeSelect">
             <option value="0">Please select a crime...</option>
             ${
-                something.map()
-            }
+                convictionsCollection.map(convictionsObj => {
+                    const valueToAdd = convictionsObj.name
+                    return `
+                    <option> ${valueToAdd} </option>
+                    `
+                    
+            })
+        }
         </select>
     `
-}
+        }

@@ -6,19 +6,12 @@ export const useConvictions = () => {
     return convictions.slice()
 }
 
-export const getConviction = () => {
+export const getConvictions = () => {
     return fetch("https://criminals.glassdale.us/crimes")
         .then(response => response.json())
         .then(
             parsedConvictions => {
-                // console.table(parsedConvictions)
-                convictions = parsedConvictions.map(
-                    convictionsObj => {
-                        const valueToAdd = convictionsObj.name
-                        convictions.push(valueToAdd)
+                        convictions = parsedConvictions
                     }
                 )
             }
-        )
-}
-console.log(convictions) // This logs an array of conviction names
