@@ -3,9 +3,14 @@
 
 import  { useCriminals } from "./criminals/CriminalDataProvider.js"
 import  { criminalList } from "./criminals/CriminalList.js"
+import { useOfficers } from "./officers/OfficerDataProvider.js"
+import { officerList } from "./officers/OfficerList.js"
 
 console.log("Welcome to the main module")
 
 
-useCriminals()
+// useCriminals()
 criminalList()
+
+// useOfficers()
+officerList()

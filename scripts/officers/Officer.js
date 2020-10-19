@@ -2,8 +2,8 @@
 export const Officer = (officerObj) => {
     return `
         <div class="officer-details">
-            <h2 class="officer__name"> ${officerObj.name} </h2>
-            <p class="officer_id"> ${officerObj.id} </p>
+            <h3 class="officer__name"> ${officerObj.name} </h3>
+            <p class="officer_id"> Officer ID: ${officerObj.id} </p>
         </div>
     `
 }
