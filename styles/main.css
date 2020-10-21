@@ -20,7 +20,7 @@ h1, h2, h3, h4, h5, h6 {
 	justify-content: space-evenly;
 }
 
-.criminal-details {
+.criminal {
 	flex: 0 0 30%;
 	border: 1px dotted red;
 	text-align: center;
@@ -32,7 +32,7 @@ h1, h2, h3, h4, h5, h6 {
 	justify-content: space-evenly;
 }
 
-.officer-details {
+.officer {
 	flex: 0 0 30%;
 	border: 1px dotted blue;
 	text-align: center;

@@ -1,33 +1,37 @@
-import { Criminal } from "./Criminal.js"
 import { getCriminals, useCriminals } from "./CriminalDataProvider.js"
+import { Criminal } from "./Criminal.js"
 
+// Get a reference to the DOM element where the criminalCards will be rendered
+const criminalsContainer = document.querySelector(".criminalsContainer")
 
-// This function returns one large string of criminals which will be used for HTML injection
-export const criminalList = () => {
+// Identify the eventHub
+const eventHub = document.querySelector(".container")
 
-    // Specify target destination for HTML injection
-    const targetElement = document.querySelector(".criminalsContainer")
-    
-    // Invoke getCriminals, which returns an array of criminals in JSON format
+export const CriminalList = () => {
+
     getCriminals()
-
-    // THEN once that step is 100% complete, create variable to hold slice of data from useCriminals()
         .then(() => {
             const criminals = useCriminals()
 
-            // Create a variable to hold the string representation of each criminal in the array of criminals.
-            let criminalHTML = ""
+            let criminalsHTMLRepresentations = ""
+            for (const criminal of criminals) {
 
-            //  Loop through array of criminals and append each criminal's individual HTML representation to criminalHTML variable
-            for (const criminalObj of criminals) {
-                criminalHTML += Criminal(criminalObj)
+                criminalsHTMLRepresentations += Criminal(criminal)
+
+                criminalsContainer.innerHTML = `
+                ${criminalsHTMLRepresentations}
+                `
             }
-
-            // Take criminalHTML (String) and inject it to the DOM
-            targetElement.innerHTML += `
-            ${criminalHTML}
-            `
-        }
-        )
+        })
 }
 
+// Listen for crimeSelected customEvent
+eventHub.addEventListener("crimeSelected", event => {
+    console.log("crimeSelected event happened", event.detail.crimeThatWasChosen) // This line shows conviction id that was broadcasted from ConvictionSelect.js
+
+    // Get a slice of all criminals, so that we can filter them in the future
+    // based on the id of the conviction
+    const criminalsArray = useCriminals()
+    console.log(criminalsArray)
+
+})
