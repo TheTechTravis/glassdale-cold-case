@@ -6,7 +6,7 @@ import { useConvictions, getConvictions } from "./ConvictionDataProvider.js"
 
 // Get a reference to the DOM element where the <select> will be redered
 const contentTarget = document.querySelector(".filters__crime")
-
+const eventHub = document.querySelector(".container")
 
 export const ConvictionSelect = () => {
     // Get all convictions from application state
@@ -31,3 +31,10 @@ const render = convictionsCollection => {
     `
 }
 
+// Add eventListener that listens for any changes made to the <select>
+contentTarget.addEventListener("change", (changeEvent) => {
+    // console.log(changeEvent)
+
+    // Create a custom event
+    
+})
