@@ -4,8 +4,10 @@
 */
 import { useConvictions, getConvictions } from "./ConvictionDataProvider.js"
 
-// Get a reference to the DOM element where the <select> will be redered
+// Get a reference to the DOM element where the <select> will be rendered
 const contentTarget = document.querySelector(".filters__crime")
+
+// Identify the eventHub
 const eventHub = document.querySelector(".container")
 
 export const ConvictionSelect = () => {
@@ -31,10 +33,19 @@ const render = convictionsCollection => {
     `
 }
 
-// Add eventListener that listens for any changes made to the <select>
-contentTarget.addEventListener("change", (changeEvent) => {
-    // console.log(changeEvent)
+// Add eventListener that listens for any changeEvents made to the <select>
+eventHub.addEventListener("change", changeEvent => {
 
-    // Create a custom event
-    
+    // Only dispatchEvent if the eventListener detects change specifically on the <select> dropdown
+    if(changeEvent.target.id === "crimeSelect") {
+
+        // Create a custom event to be broadcast when a change has been made.
+        const customEvent = new CustomEvent("crimeSelected", {
+            detail: {
+                crimeThatWasChosen: changeEvent.target.value
+            }
+        })
+
+        eventHub.dispatchEvent(customEvent)
+    }
 })
