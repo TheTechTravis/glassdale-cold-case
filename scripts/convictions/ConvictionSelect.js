@@ -14,9 +14,9 @@ export const ConvictionSelect = () => {
     // Get all convictions from application state
     getConvictions()
         .then(() => {
-        const convictions = useConvictions()
-        render(convictions)
-    })
+            const convictions = useConvictions()
+            render(convictions)
+        })
 }
 
 const render = convictionsCollection => {
@@ -24,11 +24,11 @@ const render = convictionsCollection => {
         <select class="dropdown" id="crimeSelect">
             <option value="0">Please select a crime...</option>
             ${convictionsCollection.map(
-                convictionObj => {
-                    return `<option value="${convictionObj.id}"> ${convictionObj.name} </option>`
-                    }
-                    ).join("")
-                }
+        convictionObj => {
+            return `<option value="${convictionObj.id}"> ${convictionObj.name} </option>`
+        }
+    ).join("")
+        }
         </select>
     `
 }
@@ -37,7 +37,7 @@ const render = convictionsCollection => {
 eventHub.addEventListener("change", changeEvent => {
 
     // Only dispatchEvent if the eventListener detects change specifically on the <select> dropdown
-    if(changeEvent.target.id === "crimeSelect") {
+    if (changeEvent.target.id === "crimeSelect") {
 
         // Create a custom event to be broadcast when a change has been made.
         const customEvent = new CustomEvent("crimeSelected", {
