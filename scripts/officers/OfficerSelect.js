@@ -38,12 +38,10 @@ eventHub.addEventListener("change", changeEvent => {
         // Create a custom event to be broadcast when a change has been made.
         const customEvent = new CustomEvent("officerSelected", {
             detail: {
-                officer: selectedOfficer
+                officerName: selectedOfficer
             }
         })
-
-        console.log(selectedOfficer);
-
+        // console.log("Selected officer: ", selectedOfficer);
         eventHub.dispatchEvent(customEvent)
     }
 })
