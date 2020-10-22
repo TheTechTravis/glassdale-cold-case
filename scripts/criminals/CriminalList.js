@@ -34,7 +34,7 @@ eventHub.addEventListener("crimeSelected", event => {
         return convictionObj.id === parseInt(event.detail.crimeThatWasChosen)
     })
     // console.log("convictionThatWasChosen", convictionThatWasChosen)
-    
+
     const filteredCriminalsArray = criminalsArray.filter(criminalObj => {
         return criminalObj.conviction === convictionThatWasChosen.name
     })
@@ -43,14 +43,30 @@ eventHub.addEventListener("crimeSelected", event => {
 
 })
 
+// Listen for officerSelected customEvent
+eventHub.addEventListener("officerSelected", officerSelectedEventObj => {
+    // console.log("CriminalList module officerSelected custom event has been heard on the eventHub.");
+
+    const selectedOfficerName = officerSelectedEventObj.detail
+    // console.log("CriminalList module --> selectedOfficerName: ", selectedOfficerName.officerName)
+
+    const criminalsArray = useCriminals()
+
+    const filteredCriminalsArray = criminalsArray.filter(criminalObj => {
+        return criminalObj.arrestingOfficer === selectedOfficerName.officerName
+    })
+    render(filteredCriminalsArray)
+    console.log(`You are now filtering criminals by the arresting officer that was selected in the dropdown (in this case, ${selectedOfficerName.officerName})!`);
+})
+
 const render = (filteredCriminalsArray) => {
     let criminalsHTMLRepresentations = ""
-            for (const criminal of filteredCriminalsArray) {
+    for (const criminal of filteredCriminalsArray) {
 
-                criminalsHTMLRepresentations += Criminal(criminal)
+        criminalsHTMLRepresentations += Criminal(criminal)
 
-                criminalsContainer.innerHTML = `
+        criminalsContainer.innerHTML = `
                 ${criminalsHTMLRepresentations}
                 `
-            }
+    }
 }
