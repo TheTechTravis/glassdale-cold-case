@@ -4,6 +4,10 @@ import { Note } from "./Note.js"
 const eventHub = document.querySelector(".container")
 const notesContainer = document.querySelector(".notesContainer")
 
+eventHub.addEventListener("noteStateChanged", event => {
+    NoteList()
+})
+
 export const NoteList = () => {
 
     getNotes()
@@ -27,7 +31,3 @@ const render = (notesArray) => {
                 `
     }
 }
-
-// eventHub.addEventListener("click", clickEvent => {
-
-// })
