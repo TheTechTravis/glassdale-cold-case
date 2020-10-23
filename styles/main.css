@@ -38,6 +38,14 @@ h1, h2, h3, h4, h5, h6 {
 	text-align: center;
 }
 
-.criminalHeading, .officerHeading {
+.criminalHeading, .officerHeading, .notesHeading {
 text-align: center;
+}
+
+.notesContainer {
+	border: 1px solid royalblue
+}
+
+.note {
+	border: 1px solid black
 }
