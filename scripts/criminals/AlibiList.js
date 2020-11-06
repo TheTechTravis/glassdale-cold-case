@@ -20,10 +20,6 @@ export const createAlibiListener = () => {
 }
 
 
-
-// Get the alibis related to a single criminal and show it in a list
-
-
 // Add a list of alibis to the criminal card
 const AlibiList = (criminalObj) => {
 
@@ -43,7 +39,7 @@ const render = (criminalObj) => {
                 <p>Alibi: ${alibiObj.alibi}</p>
             </div>    
                 `
-            }).join("")}
+    }).join("")}
     </div>
     `
 

@@ -1,18 +1,39 @@
+import { getCriminals, useCriminals } from "../criminals/CriminalDataProvider.js"
 import { saveNote } from "./NoteDataProvider.js"
 
 const eventHub = document.querySelector(".container")
 const contentTarget = document.querySelector(".noteFormContainer")
 
-const render = () => {
-    contentTarget.innerHTML = `
-    <input type="date" id="note--entryDate">
-    <input type="text" id="note--author" placeholder="Author's name here"></input>
-    <input type="text" id="note--suspect" placeholder="Suspect's name here"></input>
-    <textarea id="note--content" rows="4" cols="50" placeholder="Note content here"></textarea>
-    <button id="saveNote"> Save Note </button>
-    `
+// MAIN COMPONENT
+export const NoteForm = () => {
+    const arrayOfCriminals = useCriminals()
+    render(arrayOfCriminals)
 }
 
+
+// COMPONENTS THAT ARE USED IN MAIN COMPONENT
+const render = (arrayOfCriminals) => {
+    // DEFINE SHIT
+    const criminalsForDropdown = arrayOfCriminals.map((criminalObj) => {
+        return `
+            <option value="${criminalObj.id}"> ${criminalObj.name} </option>`
+
+    }).join("")
+
+    contentTarget.innerHTML = `
+    <input type="date" id="note--entryDate">
+    <input type="text" id="note--author" placeholder="Author's name here"></input> 
+        <select class="dropdown" id="criminal--select">
+            <option value="0">Please select a criminal...</option>`
+        + `${criminalsForDropdown}` +
+        `</select>
+
+        <textarea id="note--content" rows="4" cols="50" placeholder="Note content here"></textarea>
+        <button id="saveNote"> Save Note </button>
+        `
+}
+
+// EVENTS
 // Handle browser-generated click event in component
 eventHub.addEventListener("click", clickEvent => {
     if (clickEvent.target.id === "saveNote") {
@@ -20,14 +41,15 @@ eventHub.addEventListener("click", clickEvent => {
         // Grab input values
         const entryDate = document.querySelector("#note--entryDate").value
         const author = document.querySelector("#note--author").value
-        const suspect = document.querySelector("#note--suspect").value
+        // The "+" in front of the querySelector is shorthand for parseInt() method.
+        const criminalId = +document.querySelector("#criminal--select").value
         const content = document.querySelector("#note--content").value
 
         // Make a new object representation of a note
         const newNote = {
             entryDate,
             author,
-            suspect,
+            criminalId,
             content
         }
         // console.log(newNote)
@@ -36,7 +58,3 @@ eventHub.addEventListener("click", clickEvent => {
         saveNote(newNote)
     }
 })
-
-export const NoteForm = () => {
-    render()
-}

@@ -1,25 +1,11 @@
 {
   "notes": [
     {
-      "id": 1,
-      "entryDate": "2020-10-23",
-      "author": "Detective Stevenson",
-      "suspect": "Suspect Number 1",
-      "content": "This is the content of the note."
-    },
-    {
-      "id": 2,
-      "entryDate": "2020-10-23",
-      "author": "Detective Stevenson",
-      "suspect": "Suspect Number 2",
-      "content": "This is the content of the note."
-    },
-    {
-      "id": 3,
-      "entryDate": "2020-10-23",
-      "author": "Detective Stevenson",
-      "suspect": "Suspect Number 3",
-      "content": "This is the content of the note."
+      "entryDate": "2020-11-06",
+      "author": "Travis",
+      "criminalId": 5,
+      "content": "Wow, I came back to this project today and I killed it!",
+      "id": 1
     }
   ]
 }
