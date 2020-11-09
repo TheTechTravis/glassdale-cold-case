@@ -1,4 +1,5 @@
 import { getCriminals, useCriminals } from "../criminals/CriminalDataProvider.js"
+import { witnessList } from "../witnesses/WitnessList.js"
 import { saveNote } from "./NoteDataProvider.js"
 
 const eventHub = document.querySelector(".container")
@@ -30,6 +31,7 @@ const render = (arrayOfCriminals) => {
 
         <textarea id="note--content" rows="4" cols="50" placeholder="Note content here"></textarea>
         <button id="saveNote"> Save Note </button>
+        <button id="witness__statements"> Witness Statements </button>
         `
 }
 
@@ -56,5 +58,15 @@ eventHub.addEventListener("click", clickEvent => {
 
         // Change API state and application state
         saveNote(newNote)
+    }
+})
+
+
+eventHub.addEventListener("click", clickEvent => {
+    if (clickEvent.target.id === "witness__statements") {
+        console.log("There was a click!")
+        witnessList()
+        const headerReplacement = document.getElementsByClassName("criminalHeading")
+        headerReplacement.innerText = "Witness Statements"
     }
 })
