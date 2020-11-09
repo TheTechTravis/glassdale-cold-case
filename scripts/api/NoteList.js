@@ -1,4 +1,4 @@
-import { getNotes, useNotes } from "./NoteDataProvider.js"
+import { getNotes, useNotes, deleteNote } from "./NoteDataProvider.js"
 import { getCriminals, useCriminals } from "../criminals/CriminalDataProvider.js"
 import { Note } from "./Note.js"
 
@@ -26,7 +26,6 @@ const render = (noteCollection, criminalCollection) => {
     notesContainer.innerHTML = noteCollection.map(noteObj => {
         // Find the related criminal
         const relatedCriminal = criminalCollection.find(criminal => criminal.id === noteObj.criminalId)
-
         return `
         <section class="note">
         <h2>Note about ${relatedCriminal.name}</h2>
@@ -34,34 +33,29 @@ const render = (noteCollection, criminalCollection) => {
         <p class="note__author"> Author: ${noteObj.author} </p>
         <p class="note__suspect"> Suspect: ${relatedCriminal.name} </p>
         <p class="note__content"> Content: ${noteObj.content} </p>
+        <button id="deleteNote--${noteObj.id}">Delete</button>
         </section>
         `
     }).join("")
 }
 
+// EVENTS START HERE
+eventHub.addEventListener("click", clickEvent => {
+    if (clickEvent.target.id.startsWith("deleteNote--")) {
+        const [prefix, id] = clickEvent.target.id.split("--")
 
+        /*
+            Invoke the function that performs the delete operation.
 
-// THE TWO FUNCTIONS BELOW ARE MY ORIGINAL FUNCTIONS
-/* export const NoteList = () => {
-
-    getNotes()
-        .then(() => {
-            const notesArray = useNotes()
-
-            // console.log(notesArray) // This logs the array of notes. Next step is to render them to DOM.
-            render(notesArray)
-        })
-}
-
-const render = (notesArray) => {
-    let notesHTMLRepresentations = ""
-
-    for (const note of notesArray) {
-
-        notesHTMLRepresentations += Note(note)
-
-        notesContainer.innerHTML = `
-                ${notesHTMLRepresentations}
-                `
+            Once the operation is complete you should THEN invoke
+            useNotes() and render the note list again.
+        */
+        deleteNote(id).then(
+            () => {
+                const updatedNotes = useNotes()
+                const criminals = useCriminals()
+                render(updatedNotes, criminals)
+            }
+        )
     }
-} */
+})

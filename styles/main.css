@@ -47,9 +47,14 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .note {
-	border: 1px solid black
+	border: 1px solid black;
+	text-align: center;
 }
 
 .alibi__item {
 	border: 1px solid black
 }
+
+/* button {
+	justify-content: center;
+} */
