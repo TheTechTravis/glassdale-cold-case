@@ -2,7 +2,7 @@ import { getCriminals, useCriminals } from "./CriminalDataProvider.js"
 import { Criminal } from "./Criminal.js"
 import { useConvictions } from "../convictions/ConvictionDataProvider.js"
 import { getFacilities, useFacilities } from "../facility/FacilityProvider.js"
-import { getCriminalFacilities, useCriminalFacilities} from "../facility/CriminalFacilityProvider.js"
+import { getCriminalFacilities, useCriminalFacilities } from "../facility/CriminalFacilityProvider.js"
 
 // Get a reference to the DOM element where the criminalCards will be rendered
 const criminalsContainer = document.querySelector(".criminalsContainer")
@@ -97,8 +97,9 @@ eventHub.addEventListener("crimeSelected", event => {
     const filteredCriminalsArray = criminalsArray.filter(criminalObj => {
         return criminalObj.conviction === convictionThatWasChosen.name
     })
-
-    render(filteredCriminalsArray)
+    const facilities = useFacilities()
+    const crimFac = useCriminalFacilities()
+    render(filteredCriminalsArray, facilities, crimFac)
 
 })
 
@@ -114,12 +115,10 @@ eventHub.addEventListener("officerSelected", officerSelectedEventObj => {
     const filteredCriminalsArray = criminalsArray.filter(criminalObj => {
         return criminalObj.arrestingOfficer === selectedOfficerName.officerName
     })
-    render(filteredCriminalsArray)
+
+    const facilities = useFacilities()
+    const crimFac = useCriminalFacilities()
+
+    render(filteredCriminalsArray, facilities, crimFac)
     console.log(`You are now filtering criminals by the arresting officer that was selected in the dropdown (in this case, ${selectedOfficerName.officerName})!`);
 })
-
-
-
-/*
-CriminalList.js is the only component that needs information about the facilities
-*/

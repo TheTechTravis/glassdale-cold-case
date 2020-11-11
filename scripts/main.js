@@ -6,6 +6,7 @@ import { officerList } from "./officers/OfficerList.js"
 import { OfficerSelect } from "./officers/OfficerSelect.js"
 import { createAlibiListener } from "./criminals/AlibiList.js"
 import { getCriminals } from "./criminals/CriminalDataProvider.js"
+import { DisplayFacilitiesButton } from "./facility/DisplayFacilitiesButton.js"
 
 CriminalList()
 officerList()
@@ -18,3 +19,5 @@ createAlibiListener()
 
 getCriminals()
     .then(() => NoteForm())
+    
+DisplayFacilitiesButton()
