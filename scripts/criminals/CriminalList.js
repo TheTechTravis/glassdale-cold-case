@@ -1,6 +1,8 @@
 import { getCriminals, useCriminals } from "./CriminalDataProvider.js"
 import { Criminal } from "./Criminal.js"
 import { useConvictions } from "../convictions/ConvictionDataProvider.js"
+import { getFacilities, useFacilities } from "../facility/FacilityProvider.js"
+import { getCriminalFacilities, useCriminalFacilities} from "../facility/CriminalFacilityProvider.js"
 
 // Get a reference to the DOM element where the criminalCards will be rendered
 const criminalsContainer = document.querySelector(".criminalsContainer")
@@ -8,7 +10,8 @@ const criminalsContainer = document.querySelector(".criminalsContainer")
 // Identify the eventHub
 const eventHub = document.querySelector(".container")
 
-export const CriminalList = () => {
+// This is MY original CriminalList function
+/* export const CriminalList = () => {
 
     getCriminals()
         .then(() => {
@@ -16,7 +19,63 @@ export const CriminalList = () => {
 
             render(criminalArray)
         })
+} */
+
+// This is the provided CriminalList function from Ch. 16
+export const CriminalList = () => {
+    // Kick off the fetching of both collections of data
+    getFacilities()
+        .then(getCriminals)
+        .then(getCriminalFacilities)
+        .then(
+            () => {
+                // Pull in the data now that it has been fetched
+                const facilities = useFacilities()
+                const crimFac = useCriminalFacilities()
+                const criminals = useCriminals()
+
+                // Pass all three collections of data to render()
+                render(criminals, facilities, crimFac)
+            }
+        )
 }
+
+// This is MY original render function
+/* const render = (filteredCriminalsArray) => {
+    let criminalsHTMLRepresentations = ""
+    for (const criminal of filteredCriminalsArray) {
+
+        criminalsHTMLRepresentations += Criminal(criminal)
+
+        criminalsContainer.innerHTML = `
+                ${criminalsHTMLRepresentations}
+                `
+    }
+} */
+
+const render = (criminalsToRender, allFacilities, allRelationships) => {
+
+    // Step 1 - Iterate all criminals
+    criminalsContainer.innerHTML = criminalsToRender.map(
+        (criminalObject) => {
+            // Step 2 - Filter all relationships to get only ones for this criminal
+            const facilityRelationshipsForThisCriminal = allRelationships.filter(cf => cf.criminalId === criminalObject.id)
+
+            // Step 3 - Convert the relationships to facilities with map()
+            const facilities = facilityRelationshipsForThisCriminal.map(cf => {
+                const matchingFacilityObject = allFacilities.find(facility => facility.id === cf.facilityId)
+                return matchingFacilityObject
+            })
+
+            // Must pass the matching facilities to the Criminal component
+            return Criminal(criminalObject, facilities)
+        }
+    ).join("")
+}
+
+/* 
+EVENTS START HERE
+ */
 
 // Listen for crimeSelected customEvent
 eventHub.addEventListener("crimeSelected", event => {
@@ -59,14 +118,8 @@ eventHub.addEventListener("officerSelected", officerSelectedEventObj => {
     console.log(`You are now filtering criminals by the arresting officer that was selected in the dropdown (in this case, ${selectedOfficerName.officerName})!`);
 })
 
-const render = (filteredCriminalsArray) => {
-    let criminalsHTMLRepresentations = ""
-    for (const criminal of filteredCriminalsArray) {
 
-        criminalsHTMLRepresentations += Criminal(criminal)
 
-        criminalsContainer.innerHTML = `
-                ${criminalsHTMLRepresentations}
-                `
-    }
-}
+/*
+CriminalList.js is the only component that needs information about the facilities
+*/
