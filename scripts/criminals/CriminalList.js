@@ -4,11 +4,12 @@ import { useConvictions } from "../convictions/ConvictionDataProvider.js"
 import { getFacilities, useFacilities } from "../facility/FacilityProvider.js"
 import { getCriminalFacilities, useCriminalFacilities } from "../facility/CriminalFacilityProvider.js"
 
+// Identify the eventHub
+const eventHub = document.querySelector(".container")
+
 // Get a reference to the DOM element where the criminalCards will be rendered
 const criminalsContainer = document.querySelector(".criminalsContainer")
 
-// Identify the eventHub
-const eventHub = document.querySelector(".container")
 
 // This is MY original CriminalList function
 /* export const CriminalList = () => {
@@ -74,7 +75,7 @@ const render = (criminalsToRender, allFacilities, allRelationships) => {
 }
 
 /* 
-EVENTS START HERE
+                        EVENTS START HERE
  */
 
 // Listen for crimeSelected customEvent
@@ -121,4 +122,9 @@ eventHub.addEventListener("officerSelected", officerSelectedEventObj => {
 
     render(filteredCriminalsArray, facilities, crimFac)
     console.log(`You are now filtering criminals by the arresting officer that was selected in the dropdown (in this case, ${selectedOfficerName.officerName})!`);
+})
+
+// Listen for facilityButtonClicked event
+eventHub.addEventListener("facilityButtonWasClicked", facilitiesButtonClickedResponse => {
+    console.log("CriminalList.js was heard DisplayFacilitiesButton.js! :D")
 })

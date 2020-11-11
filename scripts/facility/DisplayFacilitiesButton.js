@@ -9,8 +9,12 @@ export const DisplayFacilitiesButton = () => {
 }
 
 /* EVENTS START HERE */
-eventHub.addEventListener("click", facilitiesButtonClicked => {
-    if (facilitiesButtonClicked.target.id === "facility-button") {
+eventHub.addEventListener("click", ClickEvent => {
+    if (ClickEvent.target.id === "facility-button") {
+        
         console.log("There was a click!")
+        
+        const facilityButtonEvent = new CustomEvent("facilityButtonWasClicked")
+        eventHub.dispatchEvent(facilityButtonEvent)
     }
 })
