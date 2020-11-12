@@ -41,7 +41,6 @@ eventHub.addEventListener("change", changeEvent => {
                 officerName: selectedOfficer
             }
         })
-        // console.log("Selected officer: ", selectedOfficer);
         eventHub.dispatchEvent(customEvent)
     }
 })

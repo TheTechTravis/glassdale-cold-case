@@ -45,7 +45,6 @@ eventHub.addEventListener("change", changeEvent => {
                 crimeThatWasChosen: changeEvent.target.value
             }
         })
-
         eventHub.dispatchEvent(customEvent)
     }
 })

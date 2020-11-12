@@ -1,18 +1,17 @@
 import { Officer } from "./Officer.js"
 import { getOfficers, useOfficers } from "./OfficerDataProvider.js"
 
-
 // This function returns one large string of officers which will be used for HTML injection
 export const officerList = () => {
 
     // Specify target destination for HTML injection
     const targetElement = document.querySelector(".officersContainer")
     const officerHeading = document.querySelector(".officerHeading")
-    
+
     // Invoke getOfficers, which returns an array of officers in JSON format
     getOfficers()
 
-    // THEN once that step is 100% complete, create variable to hold slice of data from useOfficers()
+        // THEN once that step is 100% complete, create variable to hold slice of data from useOfficers()
         .then(() => {
             const officers = useOfficers()
 

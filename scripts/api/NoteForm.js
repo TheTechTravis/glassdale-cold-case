@@ -1,4 +1,4 @@
-import { getCriminals, useCriminals } from "../criminals/CriminalDataProvider.js"
+import { useCriminals } from "../criminals/CriminalDataProvider.js"
 import { witnessList } from "../witnesses/WitnessList.js"
 import { saveNote } from "./NoteDataProvider.js"
 
@@ -10,7 +10,6 @@ export const NoteForm = () => {
     const arrayOfCriminals = useCriminals()
     render(arrayOfCriminals)
 }
-
 
 // COMPONENTS THAT ARE USED IN MAIN COMPONENT
 const render = (arrayOfCriminals) => {
@@ -57,17 +56,14 @@ eventHub.addEventListener("click", clickEvent => {
             criminalId,
             content
         }
-        // console.log(newNote)
 
         // Change API state and application state
         saveNote(newNote)
     }
 })
 
-
 eventHub.addEventListener("click", clickEvent => {
     if (clickEvent.target.id === "witness__statements") {
-        console.log("There was a click!")
         witnessList()
         const headerReplacement = document.getElementsByClassName("criminalHeading")
         headerReplacement.innerText = "Witness Statements"
