@@ -35,7 +35,10 @@ const render = (arrayOfCriminals) => {
         `
 }
 
-// EVENTS
+/* 
+                        EVENTS START HERE
+ */
+
 // Handle browser-generated click event in component
 eventHub.addEventListener("click", clickEvent => {
     if (clickEvent.target.id === "saveNote") {

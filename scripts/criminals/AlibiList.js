@@ -30,6 +30,8 @@ const AlibiList = (criminalObj) => {
 const render = (criminalObj) => {
     const targetContent = document.querySelector(`#criminal-${criminalObj.id}`)
 
+    // if ()
+
     targetContent.innerHTML += `
     <div class="alibi__list">
         ${criminalObj.known_associates.map(alibiObj => {
