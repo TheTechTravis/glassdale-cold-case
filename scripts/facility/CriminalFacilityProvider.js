@@ -3,7 +3,6 @@ This module is responsible for fetching facilities data from API.
 */
 
 let criminalFacilities = []
-
 export const useCriminalFacilities = () => {
     return criminalFacilities.slice()
 }

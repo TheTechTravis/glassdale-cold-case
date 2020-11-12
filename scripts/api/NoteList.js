@@ -1,6 +1,5 @@
 import { getNotes, useNotes, deleteNote } from "./NoteDataProvider.js"
 import { getCriminals, useCriminals } from "../criminals/CriminalDataProvider.js"
-import { Note } from "./Note.js"
 
 const eventHub = document.querySelector(".container")
 const notesContainer = document.querySelector(".notesContainer")
@@ -9,8 +8,6 @@ eventHub.addEventListener("noteStateChanged", event => {
     NoteList()
 })
 
-
-// THE TWO FUNCTIONS BELOW WERE YANKED/COPIED FROM THE COURSE MATERIAL.
 export const NoteList = () => {
     getNotes()
         .then(getCriminals)

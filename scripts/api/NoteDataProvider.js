@@ -6,7 +6,6 @@ const dispatchStateChangeEvent = () => {
 }
 
 let notes = []
-
 export const useNotes = () => {
     return notes.slice()
 }

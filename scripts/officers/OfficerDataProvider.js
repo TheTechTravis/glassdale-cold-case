@@ -1,6 +1,5 @@
-let officers = []
-
 // Create a copy of officers[] to work with so that the original array is not mutated
+let officers = []
 export const useOfficers = () => {
     return officers.slice()
 }
