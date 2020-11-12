@@ -22,7 +22,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .criminal {
 	flex: 0 0 30%;
-	border: 1px dotted red;
+	border: 2px dotted red;
 	text-align: center;
 }
 
@@ -34,33 +34,41 @@ h1, h2, h3, h4, h5, h6 {
 
 .officer {
 	flex: 0 0 30%;
-	border: 1px dotted blue;
+	border: 2px dotted blue;
 	text-align: center;
+}
+
+.facility {
+	flex: 0 0 30%;
+	border: 2px solid black;
+	text-align: center;
+}
+
+.facilityContainer {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-evenly;
 }
 
 .witness {
 	flex: 0 0 30%;
-	border: 1px dotted green;
+	border: 2px dotted green;
 	text-align: center;
 }
 
-.criminalHeading, .officerHeading, .notesHeading {
+.criminalHeading, .officerHeading, .notesHeading, .facilityHeading {
 	text-align: center;
 }
 
 .notesContainer {
-	border: 1px solid royalblue
+	border: 2px solid royalblue
 }
 
 .note {
-	border: 1px solid black;
+	border: 2px solid black;
 	text-align: center;
 }
 
 .alibi__item {
-	border: 1px solid black
+	border: 2px solid rgb(95, 224, 21)
 }
-
-/* button {
-	justify-content: center;
-} */

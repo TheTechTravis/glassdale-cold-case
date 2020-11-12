@@ -3,12 +3,16 @@ import { Criminal } from "./Criminal.js"
 import { useConvictions } from "../convictions/ConvictionDataProvider.js"
 import { getFacilities, useFacilities } from "../facility/FacilityProvider.js"
 import { getCriminalFacilities, useCriminalFacilities } from "../facility/CriminalFacilityProvider.js"
+import { FacilityList } from "../facility/FacilityList.js"
 
 // Identify the eventHub
 const eventHub = document.querySelector(".container")
 
 // Get a reference to the DOM element where the criminalCards will be rendered
+const criminalHeading = document.querySelector(".criminalHeading")
 const criminalsContainer = document.querySelector(".criminalsContainer")
+const facilitiesContainer = document.querySelector(".facilityContainer")
+const facilityHeading = document.querySelector(".facilityHeading")
 
 
 // This is MY original CriminalList function
@@ -57,7 +61,8 @@ export const CriminalList = () => {
 const render = (criminalsToRender, allFacilities, allRelationships) => {
 
     // Step 1 - Iterate all criminals
-    criminalsContainer.innerHTML = criminalsToRender.map(
+    criminalHeading.innerHTML = `<h2>Criminals</h2>`
+    criminalsContainer.innerHTML += criminalsToRender.map( 
         (criminalObject) => {
             // Step 2 - Filter all relationships to get only ones for this criminal
             const facilityRelationshipsForThisCriminal = allRelationships.filter(cf => cf.criminalId === criminalObject.id)
@@ -98,10 +103,9 @@ eventHub.addEventListener("crimeSelected", event => {
     const filteredCriminalsArray = criminalsArray.filter(criminalObj => {
         return criminalObj.conviction === convictionThatWasChosen.name
     })
-    const facilities = useFacilities()
-    const crimFac = useCriminalFacilities()
+    const facilities = useFacilities() // This line was added to fix dropdown filtering functionality
+    const crimFac = useCriminalFacilities() // This line was added to fix dropdown filtering functionality
     render(filteredCriminalsArray, facilities, crimFac)
-
 })
 
 // Listen for officerSelected customEvent
@@ -117,14 +121,29 @@ eventHub.addEventListener("officerSelected", officerSelectedEventObj => {
         return criminalObj.arrestingOfficer === selectedOfficerName.officerName
     })
 
-    const facilities = useFacilities()
-    const crimFac = useCriminalFacilities()
+    const facilities = useFacilities() // This line was added to fix dropdown filtering functionality
+    const crimFac = useCriminalFacilities() // This line was added to fix dropdown filtering functionality
 
     render(filteredCriminalsArray, facilities, crimFac)
     console.log(`You are now filtering criminals by the arresting officer that was selected in the dropdown (in this case, ${selectedOfficerName.officerName})!`);
 })
 
-// Listen for facilityButtonClicked event
-eventHub.addEventListener("facilityButtonWasClicked", facilitiesButtonClickedResponse => {
+// Listen for facilityButtonWasClicked event and respond by toggling between rendering criminals and rendering facilities.
+eventHub.addEventListener("facilityButtonWasClicked", eventResponse => {
     console.log("CriminalList.js was heard DisplayFacilitiesButton.js! :D")
+
+    // If statement checks if FacilityList is already rendered
+    // NOTE: THIS WILL ONLY WORK IF THE facilitiesContainer HAS ZERO CHARACTERS BETWEEN OPENING/CLOSING TAGS
+    if (facilitiesContainer.textContent === "") {
+
+        // Render FacilityList HTML
+        facilityHeading.innerHTML = `<h2>Facilities</h2>`
+        FacilityList()
+    }
+
+    // Reset FacilityList HTML
+    else {
+        facilityHeading.innerHTML = ""
+        facilitiesContainer.innerHTML = ""
+    }
 })

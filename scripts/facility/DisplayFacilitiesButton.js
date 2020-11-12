@@ -1,6 +1,6 @@
 
 const eventHub = document.querySelector(".container")
-const contentTarget = document.querySelector(".facility__button")
+const contentTarget = document.getElementsByClassName("facility__button")[0]
 
 export const DisplayFacilitiesButton = () => {
     return contentTarget.innerHTML = `

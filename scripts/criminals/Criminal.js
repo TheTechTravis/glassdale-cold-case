@@ -1,26 +1,11 @@
 const eventHub = document.querySelector(".container")
 
-
 // This function creates and returns a string of HTML components that represent a single criminalObj, which will later be used to inject HTML content dynamically.
 
-/* export const Criminal = (criminalObj) => {
-    return `
-        <div id="criminal-${criminalObj.id}" class="criminal">
-            <h3 class="criminal__name"> ${criminalObj.name} </h3>
-            <p class="criminal__age"> Age: ${criminalObj.age} </p>
-            <p class="criminal__conviction"> Crime: ${criminalObj.conviction} </p>
-            <p class="criminal__incarceration-start"> Term start: ${new Date(criminalObj.incarceration.start).toLocaleDateString("en-US")} </p>
-            <p class="criminal__incarceration-end"> Term end: ${new Date(criminalObj.incarceration.end).toLocaleDateString("en-US")} </p>
-            <button id="associates--${criminalObj.id}"> Associate Alibis </button>
-        </div>
-    `
-} */
-
-// This is the provided CriminalList function from Ch. 16
 export const Criminal = (criminalObject, facilities) => {
     return `
     <div id="criminal-${criminalObject.id}" class="criminal">
-        <h4>${criminalObject.name}</h4>
+        <h3>${criminalObject.name}</h3>
         <div class="criminal__details">
             <p>Convicted for ${criminalObject.conviction}</p>
             <p>Arrested by ${criminalObject.arrestingOfficer}</p>
@@ -29,8 +14,8 @@ export const Criminal = (criminalObject, facilities) => {
                 ${new Date(criminalObject.incarceration.end).toLocaleDateString()}
             </p>
             <p>Age: ${criminalObject.age}</p>
-            <div>
-                <h2>Facilities</h2>
+            <div class="facilities-card">
+                <h3>Facilities</h3>
                 <ul>
                     ${facilities.map(f => `<li>${f.facilityName}</li>`).join("")}
                 </ul>

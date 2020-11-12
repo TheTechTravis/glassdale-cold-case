@@ -7,6 +7,7 @@ export const officerList = () => {
 
     // Specify target destination for HTML injection
     const targetElement = document.querySelector(".officersContainer")
+    const officerHeading = document.querySelector(".officerHeading")
     
     // Invoke getOfficers, which returns an array of officers in JSON format
     getOfficers()
@@ -24,6 +25,7 @@ export const officerList = () => {
             }
 
             // Take officerHTML (String) and inject it to the DOM
+            officerHeading.innerHTML = `<h2>Officers</h2>`
             targetElement.innerHTML += `
             ${officerHTML}
             `
