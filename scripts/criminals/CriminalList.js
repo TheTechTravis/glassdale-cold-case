@@ -62,7 +62,7 @@ const render = (criminalsToRender, allFacilities, allRelationships) => {
 
     // Step 1 - Iterate all criminals
     criminalHeading.innerHTML = `<h2>Criminals</h2>`
-    criminalsContainer.innerHTML += criminalsToRender.map( 
+    criminalsContainer.innerHTML = criminalsToRender.map( 
         (criminalObject) => {
             // Step 2 - Filter all relationships to get only ones for this criminal
             const facilityRelationshipsForThisCriminal = allRelationships.filter(cf => cf.criminalId === criminalObject.id)
@@ -93,18 +93,20 @@ eventHub.addEventListener("crimeSelected", event => {
     // console.log("array of criminals", criminalsArray)
 
     const convictionsArray = useConvictions()
-    // console.log("array of convictions", convictionsArray)
+    console.log("array of convictions", convictionsArray)
 
     const convictionThatWasChosen = convictionsArray.find(convictionObj => {
         return convictionObj.id === parseInt(event.detail.crimeThatWasChosen)
     })
-    // console.log("convictionThatWasChosen", convictionThatWasChosen)
+    console.log("convictionThatWasChosen", convictionThatWasChosen)
 
     const filteredCriminalsArray = criminalsArray.filter(criminalObj => {
         return criminalObj.conviction === convictionThatWasChosen.name
     })
-    const facilities = useFacilities() // This line was added to fix dropdown filtering functionality
-    const crimFac = useCriminalFacilities() // This line was added to fix dropdown filtering functionality
+    console.log(filteredCriminalsArray)
+
+    const facilities = useFacilities() 
+    const crimFac = useCriminalFacilities() 
     render(filteredCriminalsArray, facilities, crimFac)
 })
 
