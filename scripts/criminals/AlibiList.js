@@ -22,11 +22,33 @@ export const createAlibiListener = () => {
 
 // Add a list of alibis to the criminal card
 const AlibiList = (criminalObj) => {
-
     render(criminalObj)
 }
 
-// Render method for adding alibis
+// Heath's solution
+const render = (criminal) => {
+    const alibiElement = document.querySelector(`#criminal-${criminal.id}`)
+
+    // NOTE: childElementCount references the number of direct children within the Criminal.js module.
+    if (alibiElement.childElementCount === 2) {
+        alibiElement.innerHTML += `
+    <div class="alibi__list--${criminal.id}">
+        ${criminal.known_associates.map(alibiObj => {
+            return `
+                <br>
+                <dt>Associate: ${alibiObj.name}</dt>
+                <dt>Alibi: ${alibiObj.alibi}</p>
+            `
+        }).join("")}
+    </div>
+    `
+    } else {
+        const listElement = document.querySelector(`.alibi__list--${criminal.id}`)
+        listElement.parentNode.removeChild(listElement)
+    }
+}
+
+/* // Render method for adding alibis
 const render = (criminalObj) => {
     const targetContent = document.querySelector(`#criminal-${criminalObj.id}`)
 
@@ -45,4 +67,4 @@ const render = (criminalObj) => {
     </div>
     `
 
-}
+} */
